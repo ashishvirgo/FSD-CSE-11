@@ -1,0 +1,29 @@
+.item{
+    width: 400px;
+    height: 400px;
+    background-color: bisque;
+    border: 2px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    flex-direction: column;
+}
+.item h2{
+    color:red;
+    margin:5px;
+    padding:5px;
+}
+.item h3{
+    color: green;
+    margin:5px;
+    padding:5px;
+}
+.btn{
+    width: 120px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+}
