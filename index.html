@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Fetch</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            width: 80vw;
+            margin: auto;
+        }
+        th,td{
+            border: 2px solid green;
+            text-align: center;
+        }
+    </style>
+    <script>
+        let rate=0;
+        const URL="https://dummyjson.com/products?limit=100&skip=2";
+        async function loadProducts(){
+            try{
+               const res=await fetch(URL);
+               let rows="";
+               console.log("res=",res);
+               const data=await res.json();
+               console.log("data=",data.products)
+               data.products.map((i,index)=>(
+                rows+=`
+                   <tr>
+                    <td>${index+1}</td>
+                    <td>${i.title}</td>
+                    <td><img src=${i.images[0]} width=50 height=50/></td>
+                    <td>${i.category}</td>
+                    <td>${i.rating}</td>
+                    <td>${(i.price*rate).toFixed(2)}₹</td>
+                    <td>${i.stock}</td>
+                    </tr>`
+               ))
+               const el=document.getElementById("data");
+               el.innerHTML=rows;
+            }
+            catch(err){
+                console.log("Error:",err);
+            }
+        }
+        async function getRate(){
+            try{
+              const URL="https://open.er-api.com/v6/latest/USD";
+              const res=await fetch(URL);
+              const data=await res.json(); 
+              console.log("rate=",data.rates.INR);
+              return Number(data.rates.INR);
+            }
+            catch(err){
+                console.log("Error:",err);
+            }
+        }
+        loadProducts();
+        const test=async()=>{
+            rate=await getRate();
+        }
+        test();
+        console.log("Rate=",rate)
+    </script>
+</head>
+<body>
+    <h1><center>List of products</center></h1>
+    <table>
+        <thead>
+            <tr>
+            <th>Sr.No.</th>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Rating</th>
+            <th>Price</th>
+            <th>stock</th>
+            </tr>
+        </thead>
+        <tbody id="data">
+
+        </tbody>
+    </table>
+</body>
+</html>
