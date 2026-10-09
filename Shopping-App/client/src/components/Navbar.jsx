@@ -1,12 +1,12 @@
+import {Link} from "react-router-dom"
 const Navbar = () => {
   return (
     <div className="navbar">
-      <a>Home</a>
-      <a>MyCart</a>
-      <a>MyOrders</a>
-      <a>Settings</a>
-      <a>MyProfile</a>
-      <a>Logout</a>
+ <Link to="/">Home</Link>
+ <Link to="/mycart">My Cart</Link>
+ <Link to="/myorders">My orders</Link>
+ <Link to="/settings">Settings</Link>
+ <Link to="/logout">Logout</Link>     
     </div>
   )
 }
